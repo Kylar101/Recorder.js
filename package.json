@@ -1,0 +1,26 @@
+{
+  "name": "recorder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "recorder.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kylar101/recorder.git"
+  },
+  "author": "Ben Lowbridge",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kylar101/recorder/issues"
+  },
+  "homepage": "https://github.com/Kylar101/recorder#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "webpack": "^2.5.0",
+    "webpack-stream": "^3.2.0"
+  },
+  "dependencies": {
+  }
+}
