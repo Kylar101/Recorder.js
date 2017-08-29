@@ -11,3 +11,5 @@ const webpackStream = require('webpack-stream');
 	gulp.task('watch', ['pack'], ()=>{
 		gulp.watch(['*.js'], ['pack'])
 	})
+
+	gulp.task('default', ['watch'])

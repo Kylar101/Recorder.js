@@ -1,3 +1,3 @@
-import rec from './recorder'
+import Recorder from './recorder'
 
-let media = new rec.Recorder('gUMArea')
+var rec = new Recorder('gUMArea')

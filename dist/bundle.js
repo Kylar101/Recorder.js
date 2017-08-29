@@ -71,20 +71,32 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export Recorder */
 
 
-function Recorder (containerID) {
+/* harmony default export */ __webpack_exports__["a"] = (function (containerID) {
+	this.wat = 'hello'
+	this.container = document.querySelector(`#${containerID}`)
+	this.start = `<button type="button" id="start">Start</button>`
+	this.stop = `<button type="button" id="stop">Stop</button>`
+	this.mediaOptions = {
+        video: {
+          tag: 'video',
+          type: 'video/webm',
+          ext: '.mp4',
+          gUM: {video: true, audio: true}
+        },
+        audio: {
+          tag: 'audio',
+          type: 'audio/mp3',
+          ext: '.mp3',
+          gUM: {audio: true}
+        }
+      }
 
-	var log = console.log.bind(console),
-		container = document.getElementById(containerID),
-		start = `<button type="button" id="start">Start</button>`,
-		stop = `<button type="button" id="stop">Stop</button>`
 
-	container.insertAdjacentHTML('beforeend', start)
-	container.insertAdjacentHTML('beforeend', stop)
-        
-}
+	this.container.insertAdjacentHTML('beforeend', this.start)
+	this.container.insertAdjacentHTML('beforeend', this.stop)
+});
 
 /***/ }),
 /* 1 */
@@ -95,7 +107,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__recorder__ = __webpack_require__(0);
 
 
-let media = new __WEBPACK_IMPORTED_MODULE_0__recorder__["default"].Recorder('gUMArea')
+var rec = new __WEBPACK_IMPORTED_MODULE_0__recorder__["a" /* default */]('gUMArea')
 
 /***/ })
 /******/ ]);
