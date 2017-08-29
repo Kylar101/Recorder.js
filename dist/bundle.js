@@ -75,7 +75,7 @@
 
 /* harmony default export */ __webpack_exports__["a"] = (function (containerID) {
 	this.wat = 'hello'
-	this.container = document.querySelector(`#${containerID}`)
+	this.container = document.getElementById(containerID)
 	this.start = `<button type="button" id="start">Start</button>`
 	this.stop = `<button type="button" id="stop">Stop</button>`
 	this.mediaOptions = {
