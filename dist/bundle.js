@@ -106,7 +106,7 @@
 	this.initialiseMedia = function () {
 		navigator.mediaDevices.getUserMedia(this.mediaType.gUM).then(_stream => {
 	    this.stream = _stream
-	    // this.start.removeAttribute('disabled')
+	    document.getElementById('start').removeAttribute('disabled')
 	    this.start.disabled = false
 	    this.recorder = new MediaRecorder(this.stream);
 	    this.recorder.ondataavailable = e => {
@@ -139,8 +139,8 @@
 	  * Starts recording
 	  */
 	  this.startRecording = function () {
-		  this.start.disabled = true
-		  this.stop.removeAttribute('disabled')
+		  document.getElementById('start').disabled = true
+		  document.getElementById('stop').removeAttribute('disabled')
 		  this.chunks=[]
 		  this.recorder.start()
 	  }
@@ -149,9 +149,9 @@
 	   * Stops recording
 	   */
 	  this.stopRecording = function () {
-		  this.stop.disabled = true
+		  document.getElementById('stop').disabled = true
 		  this.recorder.stop()
-		  this.start.removeAttribute('disabled')
+		  document.getElementById('start').removeAttribute('disabled')
 	  }
 
 	  this.makeLink = function () {
