@@ -129,6 +129,18 @@
 	}
 
 	/**
+	 * Toggles Media Type
+	 */
+
+	 this.toggleMediaType = function () {
+	 	if (this.mediaType.tag == 'audio') {
+			this.mediaType = this.mediaOptions.video
+		} else {
+			this.mediaType = this.mediaOptions.audio
+		}	
+	 }
+
+	/**
 	 * Returns current Media type
 	 */
 	 this.getMediaType = function() {
@@ -154,12 +166,16 @@
 		  document.getElementById('start').removeAttribute('disabled')
 	  }
 
+	  /**
+	   * generates the download button
+	   */
+
 	  this.makeLink = function () {
 		  let blob = new Blob(this.chunks, {type: this.mediaType.type })
 		    , url = URL.createObjectURL(blob)
 		    , li = document.createElement('div')
 		    , mt = document.createElement(this.mediaType.tag)
-		    , hf = document.createElement('button')
+		    , hf = document.createElement('a')
 		  ;
 		  mt.controls = true;
 		  mt.src = url;
@@ -170,6 +186,10 @@
 		  li.appendChild(hf);
 		  this.container.appendChild(li);
 	  }
+
+	  /**
+	   * Generates a unique filename
+	   */
 
 	  this.guid = function () {
 	  	return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
