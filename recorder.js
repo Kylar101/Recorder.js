@@ -34,6 +34,7 @@ export default function (containerID) {
 		navigator.mediaDevices.getUserMedia(this.mediaType.gUM).then(_stream => {
 	    this.stream = _stream
 	    document.getElementById('start').removeAttribute('disabled')
+	    this.recorder = new MediaRecorder(this.stream)
 	    this.recorder.ondataavailable = e => {
 	      this.chunks.push(e.data)
 	      if(this.recorder.state == 'inactive')  this.makeLink()
