@@ -107,8 +107,13 @@
 		navigator.mediaDevices.getUserMedia(this.mediaType.gUM).then(_stream => {
 	    this.stream = _stream
 	    document.getElementById('start').removeAttribute('disabled')
+<<<<<<< HEAD
 	    // this.start.disabled = false
 	    this.recorder = new MediaRecorder(this.stream)
+=======
+	    this.start.disabled = false
+	    this.recorder = new MediaRecorder(this.stream);
+>>>>>>> master
 	    this.recorder.ondataavailable = e => {
 	      this.chunks.push(e.data)
 	      if(this.recorder.state == 'inactive')  this.makeLink()
