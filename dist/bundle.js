@@ -108,11 +108,11 @@
 	    this.stream = _stream
 	    document.getElementById('start').removeAttribute('disabled')
 	    // this.start.disabled = false
-	    this.recorder = new MediaRecorder(this.stream);
+	    this.recorder = new MediaRecorder(this.stream)
 	    this.recorder.ondataavailable = e => {
 	      this.chunks.push(e.data)
 	      if(this.recorder.state == 'inactive')  this.makeLink()
-	    };
+	    }
 	    log('got media successfully')
 	  }).catch(log)
 	}
@@ -176,15 +176,22 @@
 		    , li = document.createElement('div')
 		    , mt = document.createElement(this.mediaType.tag)
 		    , hf = document.createElement('a')
-		  ;
-		  mt.controls = true;
-		  mt.src = url;
-		  hf.href = url;
-		  hf.download = `${this.guid()}${this.mediaType.ext}`;
-		  hf.innerHTML = `download ${hf.download}`;
-		  li.appendChild(mt);
-		  li.appendChild(hf);
-		  this.container.appendChild(li);
+		    , dl = document.createElement('a')
+		  this.counter++
+		  mt.controls = true
+		  mt.src = url
+		  mt.id = 'media-file'
+		  mt.classList.add(`${this.counter}-file`)
+		  hf.href = url
+		  hf.download = `${this.guid()}${this.mediaType.ext}`
+		  hf.innerHTML = `download ${hf.download}`
+		  dl.innerHTML = `delete ${hf.download}`
+		  hf.id = 'download-media-file'
+		  hf.classList.add('btn')
+		  hf.classList.add(`${this.counter}-file`)
+		  li.appendChild(mt)
+		  li.appendChild(hf)
+		  this.container.appendChild(li)
 	  }
 
 	  /**
@@ -193,13 +200,13 @@
 
 	  this.guid = function () {
 	  	return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-	    s4() + '-' + s4() + s4() + s4();
+	    s4() + '-' + s4() + s4() + s4()
 	  }
 
 	  function s4() {
 		  return Math.floor((1 + Math.random()) * 0x10000)
 		    .toString(16)
-		    .substring(1);
+		    .substring(1)
 		}
 });
 
