@@ -106,8 +106,8 @@
 	this.initialiseMedia = function () {
 		navigator.mediaDevices.getUserMedia(this.mediaType.gUM).then(_stream => {
 	    this.stream = _stream
-	    // this.start.removeAttribute('disabled')
-	    this.start.disabled = false
+	    document.getElementById('start').removeAttribute('disabled')
+	    // this.start.disabled = false
 	    this.recorder = new MediaRecorder(this.stream);
 	    this.recorder.ondataavailable = e => {
 	      this.chunks.push(e.data)
@@ -139,8 +139,8 @@
 	  * Starts recording
 	  */
 	  this.startRecording = function () {
-		  this.start.disabled = true
-		  this.stop.removeAttribute('disabled')
+		  document.getElementById('start').disabled = true
+		  document.getElementById('stop').removeAttribute('disabled')
 		  this.chunks=[]
 		  this.recorder.start()
 	  }
@@ -149,27 +149,38 @@
 	   * Stops recording
 	   */
 	  this.stopRecording = function () {
-		  this.stop.disabled = true
+		  document.getElementById('stop').disabled = true
 		  this.recorder.stop()
-		  this.start.removeAttribute('disabled')
+		  document.getElementById('start').removeAttribute('disabled')
 	  }
 
 	  this.makeLink = function () {
 		  let blob = new Blob(this.chunks, {type: this.mediaType.type })
 		    , url = URL.createObjectURL(blob)
-		    , li = document.createElement('li')
+		    , li = document.createElement('div')
 		    , mt = document.createElement(this.mediaType.tag)
-		    , hf = document.createElement('a')
+		    , hf = document.createElement('button')
 		  ;
 		  mt.controls = true;
 		  mt.src = url;
 		  hf.href = url;
-		  hf.download = `${counter++}${this.mediaType.ext}`;
+		  hf.download = `${this.guid()}${this.mediaType.ext}`;
 		  hf.innerHTML = `download ${hf.download}`;
 		  li.appendChild(mt);
 		  li.appendChild(hf);
-		  ul.appendChild(li);
+		  this.container.appendChild(li);
 	  }
+
+	  this.guid = function () {
+	  	return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+	    s4() + '-' + s4() + s4() + s4();
+	  }
+
+	  function s4() {
+		  return Math.floor((1 + Math.random()) * 0x10000)
+		    .toString(16)
+		    .substring(1);
+		}
 });
 
 /***/ }),
