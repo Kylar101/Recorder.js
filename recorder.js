@@ -33,7 +33,7 @@ export default function (containerID) {
 	this.initialiseMedia = function () {
 		navigator.mediaDevices.getUserMedia(this.mediaType.gUM).then(_stream => {
 	    this.stream = _stream
-	    document.getElementById('start').removeAttribute('disabled')
+	    document.getElementById('start').disabled = false
 	    this.recorder = new MediaRecorder(this.stream)
 	    this.recorder.ondataavailable = e => {
 	      this.chunks.push(e.data)
@@ -78,7 +78,7 @@ export default function (containerID) {
 	  */
 	  this.startRecording = function () {
 		  document.getElementById('start').disabled = true
-		  document.getElementById('stop').removeAttribute('disabled')
+		  document.getElementById('stop').disabled = false
 		  this.chunks=[]
 		  this.recorder.start()
 	  }
@@ -89,7 +89,7 @@ export default function (containerID) {
 	  this.stopRecording = function () {
 		  document.getElementById('stop').disabled = true
 		  this.recorder.stop()
-		  document.getElementById('start').removeAttribute('disabled')
+		  document.getElementById('start').disabled = false
 	  }
 
 	  /**
@@ -101,8 +101,9 @@ export default function (containerID) {
 		    , url = URL.createObjectURL(blob)
 		    , li = document.createElement('div')
 		    , mt = document.createElement(this.mediaType.tag)
+		    , bt = document.createElement('button')
 		    , hf = document.createElement('a')
-		    , dl = document.createElement('a')
+		    , dl = document.createElement('button')
 			this.counter++
 		  mt.controls = true
 		  mt.src = url
@@ -113,15 +114,16 @@ export default function (containerID) {
 
 		  li.id = `${hf.download}`
 
-		  hf.innerHTML = `download ${hf.download}${this.mediaType.ext}`
+		  bt.innerHTML = `download ${hf.download}${this.mediaType.ext}`
 		  hf.id = 'download-media-file'
-		  hf.classList.add('btn')
+		  bt.classList.add('btn')
 
 		  dl.innerHTML = `delete media`
 		  dl.id = `delete-${this.counter}`
 		  dl.classList.add('btn')
 		  dl.href = '#'
 
+		  hf.appendChild(bt)
 		  li.appendChild(mt)
 		  li.appendChild(hf)
 		  li.appendChild(dl)
