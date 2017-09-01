@@ -78,7 +78,7 @@
 	this.container = document.getElementById(containerID)
 	this.start = document.getElementById('start')
 	this.stop = document.getElementById('stop')
-	this.counter = 1
+	this.counter = 0
 	this.startButton = `<button type="button" id="start">Start</button>`
 	this.stopButton = `<button type="button" id="stop">Stop</button>`
 	this.mediaOptions = {
@@ -175,22 +175,33 @@
 		    , li = document.createElement('div')
 		    , mt = document.createElement(this.mediaType.tag)
 		    , hf = document.createElement('a')
-		    , dl = document.createElement('a')
-		  this.counter++
+		    , dl = document.createElement('button')
+		this.counter++
 		  mt.controls = true
 		  mt.src = url
 		  mt.id = 'media-file'
-		  mt.classList.add(`${this.counter}-file`)
+
 		  hf.href = url
-		  hf.download = `${this.guid()}${this.mediaType.ext}`
-		  hf.innerHTML = `download ${hf.download}`
-		  dl.innerHTML = `delete ${hf.download}`
+		  hf.download = `${this.guid()}`
+
+		  li.id = `${hf.download}`
+
+		  hf.innerHTML = `download ${hf.download}${this.mediaType.ext}`
 		  hf.id = 'download-media-file'
 		  hf.classList.add('btn')
-		  hf.classList.add(`${this.counter}-file`)
+
+		  dl.innerHTML = `delete media`
+		  dl.id = `delete-${this.counter}`
+		  // dl.href = `#`
+
 		  li.appendChild(mt)
 		  li.appendChild(hf)
+		  li.appendChild(dl)
 		  this.container.appendChild(li)
+
+		  document.getElementById(`delete-${this.counter}`).addEventListener('click', ()=> {
+		  	document.getElementById(hf.download).outerHTML = ''
+		  })
 	  }
 
 	  /**
