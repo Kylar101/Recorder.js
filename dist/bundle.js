@@ -273,6 +273,11 @@ var rec = new __WEBPACK_IMPORTED_MODULE_0__recorder__["a" /* default */]('gUMAre
 // alert(rec.getMediaType())
 rec.initialiseMedia()
 
+document.getElementById('toggle').addEventListener('click', () => {
+	rec.toggleMediaType()
+	rec.initialiseMedia()
+})
+
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map
