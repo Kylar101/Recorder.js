@@ -175,8 +175,8 @@
 		    , li = document.createElement('div')
 		    , mt = document.createElement(this.mediaType.tag)
 		    , hf = document.createElement('a')
-		    , dl = document.createElement('button')
-		this.counter++
+		    , dl = document.createElement('a')
+			this.counter++
 		  mt.controls = true
 		  mt.src = url
 		  mt.id = 'media-file'
@@ -192,7 +192,8 @@
 
 		  dl.innerHTML = `delete media`
 		  dl.id = `delete-${this.counter}`
-		  // dl.href = `#`
+		  dl.classList.add('btn')
+		  dl.href = '#'
 
 		  li.appendChild(mt)
 		  li.appendChild(hf)
