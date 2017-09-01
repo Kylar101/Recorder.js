@@ -1,13 +1,16 @@
 'use strict'
 
-export default function (containerID) {
+export default function (containerID, minutes, seconds) {
 	let log = console.log.bind(console)
 	this.container = document.getElementById(containerID)
+	this.minutes = minutes
+	this.seconds = seconds
 	this.start = document.getElementById('start')
 	this.stop = document.getElementById('stop')
 	this.counter = 0
 	this.startButton = `<button type="button" id="start">Start</button>`
 	this.stopButton = `<button type="button" id="stop">Stop</button>`
+	this.countdownTimer = `<div id="countdownTimer"></div>`
 	this.mediaOptions = {
         video: {
           tag: 'video',
@@ -29,6 +32,7 @@ export default function (containerID) {
 
 	this.container.insertAdjacentHTML('beforeend', this.startButton)
 	this.container.insertAdjacentHTML('beforeend', this.stopButton)
+	this.container.insertAdjacentHTML('beforeend', this.countdownTimer)
 
 	this.initialiseMedia = function () {
 		navigator.mediaDevices.getUserMedia(this.mediaType.gUM).then(_stream => {
@@ -41,6 +45,14 @@ export default function (containerID) {
 	    }
 	    log('got media successfully')
 	  }).catch(log)
+
+		document.getElementById('start').addEventListener('click', ()=> {
+			this.startRecording()
+		})
+
+		document.getElementById('stop').addEventListener('click', ()=> {
+			this.stopRecording()
+		})
 	}
 	
 	/**
@@ -81,6 +93,7 @@ export default function (containerID) {
 		  document.getElementById('stop').disabled = false
 		  this.chunks=[]
 		  this.recorder.start()
+		  countdown('countdownTimer', this.minutes, this.seconds)
 	  }
 
 	  /**
@@ -90,6 +103,7 @@ export default function (containerID) {
 		  document.getElementById('stop').disabled = true
 		  this.recorder.stop()
 		  document.getElementById('start').disabled = false
+		  document.getElementById('countdownTimer').innerHTML = ''
 	  }
 
 	  /**
@@ -148,4 +162,26 @@ export default function (containerID) {
 		    .toString(16)
 		    .substring(1)
 		}
+
+
+	function countdown(element, minutes, seconds) {
+	    // set time for the particular countdown
+	    var time = minutes*60 + seconds;
+	    var interval = setInterval(function() {
+	        var el = document.getElementById(element);
+	        // if the time is 0 then end the counter
+	        if (time <= 0) {
+	            document.getElementById('stop').click()
+	            clearInterval(interval);
+	            return;
+	        }
+	        var minutes = Math.floor( time / 60 );
+	        if (minutes < 10) minutes = "0" + minutes;
+	        var seconds = time % 60;
+	        if (seconds < 10) seconds = "0" + seconds; 
+	        var text = minutes + ':' + seconds;
+	        el.innerHTML = text;
+	        time--;
+	    }, 1000);
+	}
 }
