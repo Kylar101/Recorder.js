@@ -36,15 +36,15 @@ export default function (containerID, minutes, seconds) {
 
 	this.initialiseMedia = function () {
 		navigator.mediaDevices.getUserMedia(this.mediaType.gUM).then(_stream => {
-	    this.stream = _stream
-	    document.getElementById('start').disabled = false
-	    this.recorder = new MediaRecorder(this.stream)
-	    this.recorder.ondataavailable = e => {
-	      this.chunks.push(e.data)
-	      if(this.recorder.state == 'inactive')  this.makeLink()
-	    }
-	    log('got media successfully')
-	  }).catch(log)
+		    this.stream = _stream
+		    document.getElementById('start').disabled = false
+		    this.recorder = new MediaRecorder(this.stream)
+		    this.recorder.ondataavailable = e => {
+			    this.chunks.push(e.data)
+			    if(this.recorder.state == 'inactive')  this.makeLink()
+		    }
+		    log('got media successfully')
+		  }).catch(log)
 
 		document.getElementById('start').addEventListener('click', ()=> {
 			this.startRecording()
@@ -70,41 +70,41 @@ export default function (containerID, minutes, seconds) {
 	 * Toggles Media Type
 	 */
 
-	 this.toggleMediaType = function () {
-	 	if (this.mediaType.tag == 'audio') {
+	this.toggleMediaType = function () {
+		if (this.mediaType.tag == 'audio') {
 			this.mediaType = this.mediaOptions.video
 		} else {
 			this.mediaType = this.mediaOptions.audio
 		}	
-	 }
+	}
 
 	/**
 	 * Returns current Media type
 	 */
-	 this.getMediaType = function() {
+	this.getMediaType = function() {
 	 	return this.mediaType.tag
-	 }
+	}
 
 	 /**
 	  * Starts recording
 	  */
-	  this.startRecording = function () {
-		  document.getElementById('start').disabled = true
-		  document.getElementById('stop').disabled = false
-		  this.chunks=[]
-		  this.recorder.start()
-		  countdown('countdownTimer', this.minutes, this.seconds)
-	  }
+	 this.startRecording = function () {
+	    document.getElementById('start').disabled = true
+	    document.getElementById('stop').disabled = false
+	    this.chunks=[]
+	    this.recorder.start()
+	    countdown('countdownTimer', this.minutes, this.seconds)
+	}
 
 	  /**
 	   * Stops recording
 	   */
-	  this.stopRecording = function () {
-		  document.getElementById('stop').disabled = true
-		  this.recorder.stop()
-		  document.getElementById('start').disabled = false
-		  document.getElementById('countdownTimer').innerHTML = ''
-	  }
+	this.stopRecording = function () {
+		document.getElementById('stop').disabled = true
+		this.recorder.stop()
+		document.getElementById('start').disabled = false
+		document.getElementById('countdownTimer').innerHTML = ''
+	}
 
 	  /**
 	   * generates the download button
