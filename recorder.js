@@ -1,10 +1,11 @@
 'use strict'
 
-export default function (containerID, minutes, seconds) {
+export default function (containerID, timer) {
     let log = console.log.bind(console)
     this.container = document.getElementById(containerID)
-    this.minutes = minutes
-    this.seconds = seconds
+    this.timer = timer
+    this.minutes = 1
+    this.seconds = 0
     this.start = document.getElementById('start')
     this.stop = document.getElementById('stop')
     this.counter = 0
@@ -33,6 +34,11 @@ export default function (containerID, minutes, seconds) {
     this.container.insertAdjacentHTML('beforeend', this.startButton)
     this.container.insertAdjacentHTML('beforeend', this.stopButton)
     this.container.insertAdjacentHTML('beforeend', this.countdownTimer)
+
+    this.setTimer = function (minutes, seconds) {
+        this.minutes = minutes
+        this.seconds = seconds
+    }
 
     this.initialiseMedia = function () {
         navigator.mediaDevices.getUserMedia(this.mediaType.gUM).then(_stream => {
@@ -79,6 +85,13 @@ export default function (containerID, minutes, seconds) {
     }
 
     /**
+     * Change file type
+     */
+    this.changeFileType = function (fileType) {
+        this.mediaType.ext = `.${fileType}`
+    }
+
+    /**
      * Returns current Media type
      */
     this.getMediaType = function () {
@@ -93,7 +106,9 @@ export default function (containerID, minutes, seconds) {
         document.getElementById('stop').disabled = false
         this.chunks = []
         this.recorder.start()
-        countdown('countdownTimer', this.minutes, this.seconds)
+        if (this.timer) {
+            countdown('countdownTimer', this.minutes, this.seconds)
+        }
     }
 
     /**
