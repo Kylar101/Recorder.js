@@ -21,13 +21,15 @@ To create the Media-Recorder instance:
 var rec = new MediaRecorder('recorderContainer',false)
 ```
 
-The Media-Recorder constructor takes two arguments, the id for the HTML container, and a boolean for if you want a countdown timer
+The Media-Recorder constructor takes two arguments, the id for the HTML container, and a boolean for if you want a countdown timer.
+
+The constructor will add a start and stop button into the container that is specified.
 
 #### HTML
 
 ```HTML
 <div id='recorderContainer'>
-    <!-- Whatever you want, the recorder controls will be inserted after -->
+    <!-- Whatever you want - the recorder controls will be inserted after -->
 </div>
 ```
 
@@ -51,13 +53,13 @@ rec.toggleMediaType()
 
 #### Inialization
 
-To inialize the MediaRecorder for use, use the following function
+To inialize the Media-Recorder for use, use the following function
 
 ```JavaScript
 rec.initialiseMedia()
 ```
 
-**NOTE:** If you change the media type after initialization, you will need to reinialize the MediaRecorder
+**NOTE:** If you change the media type after initialization, you will need to reinialize the Media-Recorder
 
 ```JavaScript
 rec.initialiseMedia()
