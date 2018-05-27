@@ -1,13 +1,12 @@
-import Recorder from './recorder'
+import {Recorderjs} from './dist/recorder'
 
-var rec = new Recorder('gUMArea', true)
-rec.setTimer(0, 10)
+var rec = new Recorderjs({containerID:'gUMArea'})
 // rec.setMediaType('video')
 // alert(rec.getMediaType())
 rec.initialiseMedia()
-rec.changeFileType('wav')
+// rec.changeFileType('wav')
 
-document.getElementById('toggle').addEventListener('click', () => {
-	rec.toggleMediaType()
-	rec.initialiseMedia()
-})
+// document.getElementById('toggle').addEventListener('click', () => {
+// 	rec.toggleMediaType()
+// 	rec.initialiseMedia()
+// })
