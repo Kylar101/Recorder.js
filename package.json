@@ -2,9 +2,10 @@
   "name": "recorder.js",
   "version": "1.0.0",
   "description": "",
-  "main": "recorder.js",
+  "main": "./dist/recorder.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "./node_modules/.bin/gulp"
   },
   "repository": {
     "type": "git",
