@@ -183,15 +183,14 @@
     /**
      * generates the download button
      */
-
     this.makeLink = function () {
         let blob = new Blob(this.chunks, { type: this.mediaType.type })
-            , url = URL.createObjectURL(blob)
-            , li = document.createElement('div')
-            , mt = document.createElement(this.mediaType.tag)
-            , bt = document.createElement('button')
-            , hf = document.createElement('a')
-            , dl = document.createElement('button')
+        let url = URL.createObjectURL(blob)
+        let li = document.createElement('div')
+        let mt = document.createElement(this.mediaType.tag)
+        let bt = document.createElement('button')
+        let hf = document.createElement('a')
+        let dl = document.createElement('button')
         this.counter++
         mt.controls = true
         mt.src = url
@@ -205,11 +204,11 @@
         bt.innerHTML = `download ${hf.download}${this.mediaType.ext}`
         hf.id = 'download-media-file'
         bt.classList.add('btn')
+        bt.url = url
 
         dl.innerHTML = `delete media`
         dl.id = `delete-${this.counter}`
         dl.classList.add('btn')
-        dl.href = '#'
 
         hf.appendChild(bt)
         li.appendChild(mt)
@@ -248,7 +247,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var rec = new __WEBPACK_IMPORTED_MODULE_0__src_recorder__["a" /* default */]('gUMArea')
-rec.setMediaType('video')
+// rec.setMediaType('video')
 // alert(rec.getMediaType())
 // rec.changeFileType('wav')
 rec.initialiseMedia()
