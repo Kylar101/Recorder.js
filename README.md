@@ -1,4 +1,4 @@
-# Media-Recorder
+# Recorder.js
 > A media recording library that allows recording using video and audio
 
 ## Usage
@@ -6,22 +6,22 @@
 ### Install and Setup
 
 ```shell
-npm install media-recorder
+npm install recorderjs
 ```
 
 ```Javascript
-import MediaRecorder from 'media-recorder'
+import Recorder from 'recorderjs'
 ```
 
-To create the Media-Recorder instance:
+To create the recorderjs instance:
 
 #### JavaScript
 
 ```Javascript
-var rec = new MediaRecorder('recorderContainer',false)
+var rec = new Recorder('recorderContainer')
 ```
 
-The Media-Recorder constructor takes two arguments, the id for the HTML container, and a boolean for if you want a countdown timer.
+The recorderjs constructor takes one arguments, the id for the HTML container.
 
 The constructor will add a start and stop button into the container that is specified.
 
@@ -37,7 +37,7 @@ The constructor will add a start and stop button into the container that is spec
 
 #### Media Type
 
-The Media-Recorder default media type is audio. To set the instance to a particular type, use the following function
+The recorderjs default media type is audio. To set the instance to a particular type, use the following function
 
 ```JavaScript
 rec.setMediaType('video')
@@ -53,27 +53,16 @@ rec.toggleMediaType()
 
 #### Inialization
 
-To inialize the Media-Recorder for use, use the following function
+To inialize the recorderjs for use, use the following function
 
 ```JavaScript
 rec.initialiseMedia()
 ```
 
-**NOTE:** If you change the media type after initialization, you will need to reinialize the Media-Recorder
+**NOTE:** If you change the media type after initialization, you will need to reinialize the recorderjs
 
 ```JavaScript
 rec.initialiseMedia()
 rec.toggleMediaType()
 rec.initialiseMedia()
-```
-
-#### Countdown Timer
-
-By adding ```true``` to the constructor initializes the countdown timer function. The timer defaults to 1 minute. To change the default timer, use the following function
-
-```JavaScript
-/**
- * Parameters: Minutes, Seconds 
- */
-rec.setTimer(0, 10)
 ```
