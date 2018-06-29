@@ -2,6 +2,7 @@
 
 var path = require('path');
 const webpack = require('webpack');
+const UglifyjsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
@@ -11,19 +12,9 @@ module.exports = {
     path: path.resolve(__dirname, './')
   },
   module: {
-  	rules: [{
-  		test: /\.(sass|scss|css)$/,
-  		// use: ExtractTextPlugin.extract({
-	        use: [{
-	        	loader: 'css-loader',
-	        	options: {
-	        		url: false
-	        	}
-	        },
-	        'sass-loader'
-	        ]
-	    // })
-  	},
-  	]
-  }
+  	rules: []
+	},
+	plugins: [
+		new UglifyjsPlugin()
+	]
 };

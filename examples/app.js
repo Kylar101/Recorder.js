@@ -1,6 +1,6 @@
-import Recorderjs from './src/recorder'
+import { Recorderjs } from '../dist/recorder'
 
-var rec = new Recorderjs('gUMArea')
+var rec = new Recorderjs({ containerID: 'gUMArea' })
 rec.setMediaType('video')
 // alert(rec.getMediaType())
 // rec.changeFileType('wav')

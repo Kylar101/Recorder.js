@@ -23,6 +23,7 @@ export default function (containerID) {
         }
     }
     this.mediaType = this.mediaOptions.audio
+    this.allRecorded = []
     this.stream = null
     this.recorder = null
     this.chunks = null
@@ -38,6 +39,7 @@ export default function (containerID) {
             console.log(this.recorder.isTypeSupported)
             this.recorder.ondataavailable = e => {
                 this.chunks.push(e.data)
+                this.allRecorded.push(e.data)
                 if (this.recorder.state == 'inactive') this.makeLink()
             }
             log('got media successfully')
@@ -104,10 +106,14 @@ export default function (containerID) {
      * Stops recording
      */
     this.stopRecording = function () {
-        document.getElementById('stop').disabled = true
         this.recorder.stop()
         console.log(this.recorder.state)
+        document.getElementById('stop').disabled = true
         document.getElementById('start').disabled = false
+    }
+    
+    this.getAllRecorded = function() {
+        return this.allRecorded
     }
 
     /**
