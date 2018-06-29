@@ -1,8 +1,7 @@
 declare var MediaRecorder: any;
 
 interface iConstructor {
-    containerID: string,
-    timer?: object
+    containerID: string
 }
 
 class Recorderjs {
@@ -10,7 +9,6 @@ class Recorderjs {
     container: any
     start: any
     stop: any
-    timer?: object
     mediaOptions: {
         video: {
             tag: string,
@@ -39,9 +37,6 @@ class Recorderjs {
 
     constructor(constructor: iConstructor) {
         this.container = document.getElementById(`${constructor.containerID}`)
-        this.timer = constructor.timer
-        this.start = document.getElementById('start')
-        this.stop = document.getElementById('stop')
         this.mediaOptions = {
             video: {
                 tag: 'video',
@@ -61,6 +56,8 @@ class Recorderjs {
         this.container.insertAdjacentHTML('beforeend', '<button type="button" id="start">Start</button>')
         this.container.insertAdjacentHTML('beforeend', '<button type="button" id="stop">Stop</button>')
         // this.container.insertAdjacentHTML('beforeend', '<div id="countdownTimer"></div>')
+        this.start = document.getElementById('start')
+        this.stop = document.getElementById('stop')
     }
 
     public initialiseMedia() {
