@@ -101,7 +101,7 @@ var Recorderjs = /** @class */ (function () {
         this.start.disabled = false;
     };
     Recorderjs.prototype.makeLink = function () {
-        var blob = new Blob(this.chunks, { type: this.mediaType.type }), url = URL.createObjectURL(blob), li = document.createElement('div'), mt = document.createElement(this.mediaType.tag), bt = document.createElement('button'), hf = document.createElement('a'), dl = document.createElement('a');
+        var blob = new Blob(this.chunks, { type: this.mediaType.type }), url = URL.createObjectURL(blob), li = document.createElement('div'), mt = document.createElement(this.mediaType.tag), bt = document.createElement('button'), hf = document.createElement('a'), dl = document.createElement('button');
         this.counter++;
         mt.controls = true;
         mt.src = url;
@@ -115,13 +115,15 @@ var Recorderjs = /** @class */ (function () {
         dl.innerHTML = "delete media";
         dl.id = "delete-" + this.counter;
         dl.classList.add('btn');
-        dl.href = '#';
         hf.appendChild(bt);
         li.appendChild(mt);
         li.appendChild(hf);
         li.appendChild(dl);
-        this.container.appendChild(li)(document.getElementById("delete-" + this.counter)).addEventListener('click', function () {
-            document.getElementById(hf.download).outerHTML = '';
+        this.container.appendChild(li);
+        var dlBtn = document.getElementById("delete-" + this.counter);
+        var outer = document.getElementById(hf.download);
+        dlBtn.addEventListener('click', function () {
+            outer.outerHTML = '';
         });
     };
     Recorderjs.prototype.guid = function () {

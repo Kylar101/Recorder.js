@@ -147,7 +147,7 @@ class Recorderjs {
             , mt: any = document.createElement(this.mediaType.tag)
             , bt = document.createElement('button')
             , hf = document.createElement('a')
-            , dl = document.createElement('a')
+            , dl = document.createElement('button')
         this.counter++
         mt.controls = true
         mt.src = url
@@ -165,16 +165,18 @@ class Recorderjs {
         dl.innerHTML = `delete media`
         dl.id = `delete-${this.counter}`
         dl.classList.add('btn')
-        dl.href = '#'
 
         hf.appendChild(bt)
         li.appendChild(mt)
         li.appendChild(hf)
         li.appendChild(dl)
         this.container.appendChild(li)
+        
+        let dlBtn: any = document.getElementById(`delete-${this.counter}`)
+        let outer: any = document.getElementById(hf.download)
 
-        (<any> document.getElementById(`delete-${this.counter}`)).addEventListener('click', () => {
-            (<any> document.getElementById(hf.download)).outerHTML = ''
+        dlBtn.addEventListener('click', () => {
+            outer.outerHTML = ''
         })
     }
 
