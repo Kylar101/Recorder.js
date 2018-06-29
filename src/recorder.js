@@ -11,7 +11,7 @@ export default function (containerID) {
     this.mediaOptions = {
         video: {
             tag: 'video',
-            type: 'video/webm',
+            type: 'video/mp4',
             ext: '.mp4',
             gUM: { video: true, audio: true }
         },
@@ -35,6 +35,7 @@ export default function (containerID) {
             this.stream = _stream
             document.getElementById('start').disabled = false
             this.recorder = new MediaRecorder(this.stream)
+            console.log(this.recorder.isTypeSupported)
             this.recorder.ondataavailable = e => {
                 this.chunks.push(e.data)
                 if (this.recorder.state == 'inactive') this.makeLink()
@@ -96,6 +97,7 @@ export default function (containerID) {
         document.getElementById('stop').disabled = false
         this.chunks = []
         this.recorder.start()
+        console.log(this.recorder.state)
     }
 
     /**
@@ -104,6 +106,7 @@ export default function (containerID) {
     this.stopRecording = function () {
         document.getElementById('stop').disabled = true
         this.recorder.stop()
+        console.log(this.recorder.state)
         document.getElementById('start').disabled = false
     }
 
@@ -111,6 +114,7 @@ export default function (containerID) {
      * generates the download button
      */
     this.makeLink = function () {
+        console.log(this.mediaType.type)
         let blob = new Blob(this.chunks, { type: this.mediaType.type })
         let url = URL.createObjectURL(blob)
         let li = document.createElement('div')
@@ -125,19 +129,17 @@ export default function (containerID) {
 
         hf.href = url
         hf.download = `${this.guid()}`
+        hf.classList.add('btn')
+        hf.innerHTML = `download ${hf.download}${this.mediaType.ext}`
+        hf.id = 'download-media-file'
 
         li.id = `${hf.download}`
-
-        bt.innerHTML = `download ${hf.download}${this.mediaType.ext}`
-        hf.id = 'download-media-file'
-        bt.classList.add('btn')
-        bt.url = url
 
         dl.innerHTML = `delete media`
         dl.id = `delete-${this.counter}`
         dl.classList.add('btn')
 
-        hf.appendChild(bt)
+        // hf.appendChild(bt)
         li.appendChild(mt)
         li.appendChild(hf)
         li.appendChild(dl)

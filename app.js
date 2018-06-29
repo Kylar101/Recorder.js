@@ -1,7 +1,7 @@
 import Recorderjs from './src/recorder'
 
 var rec = new Recorderjs('gUMArea')
-// rec.setMediaType('video')
+rec.setMediaType('video')
 // alert(rec.getMediaType())
 // rec.changeFileType('wav')
 rec.initialiseMedia()
