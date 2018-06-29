@@ -18,7 +18,7 @@ To create the recorderjs instance:
 #### JavaScript
 
 ```Javascript
-var rec = new Recorder('recorderContainer')
+var rec = new Recorder({ containerID: 'recorderContainer' })
 ```
 
 The recorderjs constructor takes one arguments, the id for the HTML container.
