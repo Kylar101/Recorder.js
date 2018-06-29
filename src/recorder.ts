@@ -33,6 +33,7 @@ class Recorderjs {
     stream: any
     recorder: any
     chunks: any
+    allRecorded: any
     counter: number
 
     constructor(constructor: iConstructor) {
@@ -40,7 +41,7 @@ class Recorderjs {
         this.mediaOptions = {
             video: {
                 tag: 'video',
-                type: 'video/webm',
+                type: 'video/mp4',
                 ext: '.mp4',
                 gUM: { video: true, audio: true }
             },
@@ -60,6 +61,11 @@ class Recorderjs {
         this.stop = document.getElementById('stop')
     }
 
+    /**
+     * @function initialiseMedia
+     * @description Generates the Recorder object
+     */
+
     public initialiseMedia() {
         navigator.mediaDevices.getUserMedia(this.mediaType.gUM).then(_stream => {
             this.stream = _stream
@@ -67,6 +73,7 @@ class Recorderjs {
             this.recorder = new MediaRecorder(this.stream)
             this.recorder.ondataavailable = (e: any) => {
                 this.chunks.push(e.data)
+                this.allRecorded.push(e.data)
                 if (this.recorder.state == 'inactive') this.makeLink()
             }
             console.log('got media successfully')
@@ -127,6 +134,11 @@ class Recorderjs {
         return this.mediaType.tag
     }
 
+    /**
+     * @function startRecording
+     * @description Starts the recording process
+     */
+
     public startRecording() {
         this.start.disabled = true
         this.stop.disabled = false
@@ -134,11 +146,32 @@ class Recorderjs {
         this.recorder.start()
     }
 
+    /**
+     * @function stopRecording
+     * @description Stops the recording process
+     */
+
     public stopRecording() {
         this.stop.disabled = true
         this.recorder.stop()
         this.start.disabled = false
     }
+
+    /**
+     * @function getAllRecorded
+     * @description returns all recorded media
+     * 
+     * @returns Array of media recordings
+     */
+
+    public getAllRecorded(): any {
+        return this.allRecorded
+    }
+
+    /**
+     * @function makeLink
+     * @description prepares recorded media for download and shows downloadable link
+     */
 
     private makeLink() {
         let blob = new Blob(this.chunks, { type: this.mediaType.type })
@@ -180,10 +213,24 @@ class Recorderjs {
         })
     }
 
+    /**
+     * @function guid
+     * @description Generates a guid
+     * 
+     * @returns guid
+     */
+
     private guid() {
         return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
         this.s4() + '-' + this.s4() + this.s4() + this.s4()
     }
+
+    /**
+     * @function s4
+     * @description builds part of a guid
+     * 
+     * @returns guid section as String
+     */
 
     private s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
