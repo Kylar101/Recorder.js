@@ -54,6 +54,7 @@ class Recorderjs {
         }
         this.mediaType = this.mediaOptions.audio
         this.counter = 0
+        this.allRecorded = []
         this.container.insertAdjacentHTML('beforeend', '<button type="button" id="start">Start</button>')
         this.container.insertAdjacentHTML('beforeend', '<button type="button" id="stop">Stop</button>')
         // this.container.insertAdjacentHTML('beforeend', '<div id="countdownTimer"></div>')
@@ -74,6 +75,7 @@ class Recorderjs {
             this.recorder.ondataavailable = (e: any) => {
                 this.chunks.push(e.data)
                 this.allRecorded.push(e.data)
+                // console.log(this.allRecorded)
                 if (this.recorder.state == 'inactive') this.makeLink()
             }
             console.log('got media successfully')

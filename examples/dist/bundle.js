@@ -92,6 +92,7 @@ var Recorderjs = /** @class */ (function () {
         };
         this.mediaType = this.mediaOptions.audio;
         this.counter = 0;
+        this.allRecorded = [];
         this.container.insertAdjacentHTML('beforeend', '<button type="button" id="start">Start</button>');
         this.container.insertAdjacentHTML('beforeend', '<button type="button" id="stop">Stop</button>');
         // this.container.insertAdjacentHTML('beforeend', '<div id="countdownTimer"></div>')
@@ -111,6 +112,7 @@ var Recorderjs = /** @class */ (function () {
             _this.recorder.ondataavailable = function (e) {
                 _this.chunks.push(e.data);
                 _this.allRecorded.push(e.data);
+                // console.log(this.allRecorded)
                 if (_this.recorder.state == 'inactive')
                     _this.makeLink();
             };
