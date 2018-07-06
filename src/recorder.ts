@@ -4,7 +4,7 @@ interface iConstructor {
     containerID: string
 }
 
-class Recorderjs {
+class Recorder {
 
     container: any
     start: any
@@ -241,4 +241,4 @@ class Recorderjs {
     }
 }
 
-export { Recorderjs }
+export default Recorder

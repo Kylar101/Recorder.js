@@ -73,8 +73,8 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Recorderjs = /** @class */ (function () {
-    function Recorderjs(constructor) {
+var Recorder = /** @class */ (function () {
+    function Recorder(constructor) {
         this.container = document.getElementById("" + constructor.containerID);
         this.mediaOptions = {
             video: {
@@ -103,7 +103,7 @@ var Recorderjs = /** @class */ (function () {
      * @function initialiseMedia
      * @description Generates the Recorder object
      */
-    Recorderjs.prototype.initialiseMedia = function () {
+    Recorder.prototype.initialiseMedia = function () {
         var _this = this;
         navigator.mediaDevices.getUserMedia(this.mediaType.gUM).then(function (_stream) {
             _this.stream = _stream;
@@ -131,7 +131,7 @@ var Recorderjs = /** @class */ (function () {
      *
      * @param type: string
      */
-    Recorderjs.prototype.setMediaType = function (type) {
+    Recorder.prototype.setMediaType = function (type) {
         if (type == 'video') {
             this.mediaType = this.mediaOptions.video;
         }
@@ -143,7 +143,7 @@ var Recorderjs = /** @class */ (function () {
      * @function toggleMediaType
      * @description toggles current media type
      */
-    Recorderjs.prototype.toggleMediaType = function () {
+    Recorder.prototype.toggleMediaType = function () {
         if (this.mediaType.tag == 'audio') {
             this.mediaType = this.mediaOptions.video;
         }
@@ -157,7 +157,7 @@ var Recorderjs = /** @class */ (function () {
      *
      * @param fileType string
      */
-    Recorderjs.prototype.changeFileType = function (fileType) {
+    Recorder.prototype.changeFileType = function (fileType) {
         this.mediaType.ext = fileType;
     };
     /**
@@ -166,14 +166,14 @@ var Recorderjs = /** @class */ (function () {
      *
      * @returns string
      */
-    Recorderjs.prototype.getMediaType = function () {
+    Recorder.prototype.getMediaType = function () {
         return this.mediaType.tag;
     };
     /**
      * @function startRecording
      * @description Starts the recording process
      */
-    Recorderjs.prototype.startRecording = function () {
+    Recorder.prototype.startRecording = function () {
         this.start.disabled = true;
         this.stop.disabled = false;
         this.chunks = [];
@@ -183,7 +183,7 @@ var Recorderjs = /** @class */ (function () {
      * @function stopRecording
      * @description Stops the recording process
      */
-    Recorderjs.prototype.stopRecording = function () {
+    Recorder.prototype.stopRecording = function () {
         this.stop.disabled = true;
         this.recorder.stop();
         this.start.disabled = false;
@@ -194,14 +194,14 @@ var Recorderjs = /** @class */ (function () {
      *
      * @returns Array of media recordings
      */
-    Recorderjs.prototype.getAllRecorded = function () {
+    Recorder.prototype.getAllRecorded = function () {
         return this.allRecorded;
     };
     /**
      * @function makeLink
      * @description prepares recorded media for download and shows downloadable link
      */
-    Recorderjs.prototype.makeLink = function () {
+    Recorder.prototype.makeLink = function () {
         var blob = new Blob(this.chunks, { type: this.mediaType.type }), url = URL.createObjectURL(blob), li = document.createElement('div'), mt = document.createElement(this.mediaType.tag), bt = document.createElement('button'), hf = document.createElement('a'), dl = document.createElement('button');
         this.counter++;
         mt.controls = true;
@@ -233,7 +233,7 @@ var Recorderjs = /** @class */ (function () {
      *
      * @returns guid
      */
-    Recorderjs.prototype.guid = function () {
+    Recorder.prototype.guid = function () {
         return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
             this.s4() + '-' + this.s4() + this.s4() + this.s4();
     };
@@ -243,14 +243,14 @@ var Recorderjs = /** @class */ (function () {
      *
      * @returns guid section as String
      */
-    Recorderjs.prototype.s4 = function () {
+    Recorder.prototype.s4 = function () {
         return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)
             .substring(1);
     };
-    return Recorderjs;
+    return Recorder;
 }());
-exports.Recorderjs = Recorderjs;
+exports.default = Recorder;
 //# sourceMappingURL=recorder.js.map
 
 /***/ }),
@@ -263,7 +263,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dist_recorder___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__dist_recorder__);
 
 
-var rec = new __WEBPACK_IMPORTED_MODULE_0__dist_recorder__["Recorderjs"]({ containerID: 'gUMArea' })
+var rec = new __WEBPACK_IMPORTED_MODULE_0__dist_recorder___default.a({ containerID: 'gUMArea' })
 rec.setMediaType('video')
 // alert(rec.getMediaType())
 // rec.changeFileType('wav')

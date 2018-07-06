@@ -2,9 +2,8 @@
   "name": "recorderjs",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/recorder.min.js",
+  "main": "./dist/recorder.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "gulp": "./node_modules/.bin/gulp",
     "tsc": "./node_modules/.bin/tsc"
   },
@@ -21,9 +20,7 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-shell": "^0.6.5",
-    "typedoc": "^0.11.1",
     "typescript": "^2.8.3",
-    "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^2.5.0",
     "webpack-stream": "^3.2.0"
   },
