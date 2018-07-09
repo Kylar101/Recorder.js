@@ -1,3 +1,6 @@
+![300artboard 1300](https://user-images.githubusercontent.com/40878798/42462661-c05c9c68-83c5-11e8-9675-45b22bec6ada.png)
+
+
 # Recorder.js
 > A media recording library that allows recording using video and audio
 
