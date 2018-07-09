@@ -6,14 +6,14 @@
 ### Install and Setup
 
 ```shell
-npm install recorderjs
+npm install @kylar101/recorder.js
 ```
 
 ```Javascript
-import Recorder from 'recorderjs'
+import Recorder from '@kylar101/recorder.js'
 ```
 
-To create the recorderjs instance:
+To create the recorder instance:
 
 #### JavaScript
 
@@ -21,7 +21,7 @@ To create the recorderjs instance:
 var rec = new Recorder({ containerID: 'recorderContainer' })
 ```
 
-The recorderjs constructor takes one arguments, the id for the HTML container.
+The recorder constructor takes one arguments, the id for the HTML container.
 
 The constructor will add a start and stop button into the container that is specified.
 
@@ -37,7 +37,7 @@ The constructor will add a start and stop button into the container that is spec
 
 #### Media Type
 
-The recorderjs default media type is audio. To set the instance to a particular type, use the following function
+The recorder default media type is audio. To set the instance to a particular type, use the following function
 
 ```JavaScript
 rec.setMediaType('video')
@@ -53,13 +53,13 @@ rec.toggleMediaType()
 
 #### Inialization
 
-To inialize the recorderjs for use, use the following function
+To inialize the recorder for use, use the following function
 
 ```JavaScript
 rec.initialiseMedia()
 ```
 
-**NOTE:** If you change the media type after initialization, you will need to reinialize the recorderjs
+**NOTE:** If you change the media type after initialization, you will need to reinialize the recorder
 
 ```JavaScript
 rec.initialiseMedia()

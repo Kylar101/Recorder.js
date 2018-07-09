@@ -1,5 +1,5 @@
 {
-  "name": "recorderjs",
+  "name": "@kylar101/recorder.js",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/recorder.js",
